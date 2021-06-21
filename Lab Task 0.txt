@@ -1,0 +1,150 @@
+Lab Task 0.0
+Task-1
+Problem1.cs
+using System;
+
+namespace Lab_Task_0 {
+    class Problem1 {
+        static void Main(string[] args) {
+            double score;
+            Console.Write("Enter your Score: ");
+            score = Convert.ToDouble(Console.ReadLine());
+
+            if(score <=100 && score >= 0) {
+                if (score >= 90) {
+                    Console.WriteLine("You Got A+");
+                }
+                else if (score <90 && score>80) {
+                    Console.WriteLine("You Got A");
+                }
+                else if (score < 80 && score > 70) {
+                    Console.WriteLine("You Got B");
+                }
+                else if (score < 70 && score > 60) {
+                    Console.WriteLine("You Got C");
+                }
+                else if (score < 60 && score > 50) {
+                    Console.WriteLine("You Got D");
+                }
+                else if (score < 50 && score >= 0) {
+                    Console.WriteLine("You Got F");
+                }
+            }
+            else {
+                Console.WriteLine("Invalid Input");
+            }
+        }
+    }
+}
+
+
+
+
+
+
+
+Task-2
+Problem2.cs
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace Lab_Task_0 {
+    class Problem2 {
+        static void Main(string[] args) {
+            double noOfKilo;
+            double price;
+            double tax;
+
+            Console.Write("Enter the price of 1 kilogram: ");
+            price = Convert.ToDouble(Console.ReadLine());
+            Console.Write("Enter the Number of kilograms: ");
+            noOfKilo = Convert.ToDouble(Console.ReadLine());
+            Console.Write("Enter the tax percentage: ");
+            tax = Convert.ToDouble(Console.ReadLine());
+
+            double totalPrice = (price * noOfKilo)+(price * noOfKilo * tax / 100);
+
+            Console.WriteLine("The Total Price is: " + totalPrice);
+
+            Console.ReadLine();
+
+        }
+    }
+}
+
+Task-3
+Problem3.cs
+using System;
+namespace Problem_3 {
+    class Problem3 {
+        static void Main(string[] args) {
+            int A;
+            int B;
+            Console.Write("Enter the value of A: ");
+            A = Convert.ToInt32(Console.ReadLine());
+            Console.Write("Enter the value of B: ");
+            B = Convert.ToInt32(Console.ReadLine());
+
+            int temp = B;
+
+            B = A;
+            A = temp;
+
+            Console.Write("The value of A: "+A+"\n");
+            Console.Write("The value of B: "+B);
+        }
+    }
+}
+Task-4
+Problem4.cs
+using System;
+
+namespace Problem_4 {
+    class Problem4 {
+        static void Main(string[] args) {
+            int input;
+            int sum=0;
+
+            for(int i = 0; i < 5; i++) {
+                Console.Write("Enter the " + (i + 1) + "st value: ");
+                input = Convert.ToInt32(Console.ReadLine());
+                sum += input;
+            }
+            Console.WriteLine("The average of 5 numbers is: " + (Convert.ToDouble(sum / 5)));
+        }
+    }
+}
+
+Task-5
+Problem5.cs
+using System;
+
+namespace Problem_5 {
+    class Program {
+
+        public static double Area(double w, double h) {
+            return w * h;
+        }
+        public static double Perimeter(double w, double h) {
+            return ((2*w)+(2*h));
+        }
+        static void Main(string[] args) {
+            double width;
+            double height;
+
+            Console.Write("Enter the width of the rectangle: ");
+            width = Convert.ToDouble(Console.ReadLine());
+
+            Console.Write("Enter the height of the rectangle: ");
+            height = Convert.ToDouble(Console.ReadLine());
+
+            Console.WriteLine("The Area of the Rectangle is: " + Area(width, height));
+            Console.WriteLine("The Perimeter of the Rectangle is: " + Perimeter(width, height));
+
+        }
+    }
+}
+
+
+

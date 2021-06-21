@@ -1,0 +1,126 @@
+Lab Task 2
+                 --------------Account--------------
+using System;
+
+namespace LabTask2 {
+    class Account {
+        private string accName;
+        private string acid;
+        private int balance;
+        public Account() {
+            Console.WriteLine("Object Created Form empty Constructor");
+        }
+        public Account(string aName, string aId, int amount) {
+            Console.WriteLine("Object Created Form parameterised Constructor");
+            AccName = aName;
+            Acid = aId;
+            Balance = amount;
+        }
+        public string AccName {
+            set {
+                if (value != null) {
+                    this.accName = value;
+                }
+            }
+            get {
+                return accName;
+            }
+        }
+        public string Acid {
+            set {
+                if (value != null) {
+                    this.acid = value;
+                }
+                else {
+                    Console.WriteLine("Invalid Input");
+                }
+            }
+            get {
+                return acid;
+            }
+        }
+        public int Balance {
+            set {
+                if (value != 0) {
+                    this.balance = value;
+                }
+            }
+            get {
+                return balance;
+            }
+        }
+
+        public void Deposite(int amount) {
+            if (amount > 0) {
+                Balance = Balance + amount;
+                Console.Write("After depositing " + amount + " new ");
+            }
+            else {
+                Console.WriteLine("Invalid Input");
+            }
+        }
+        public void Withdraw(int amount) {
+            if (amount > 0) {
+                if (balance > amount) {
+                    Balance = Balance - amount;
+                    Console.Write("After withdrawing " + amount + " new ");
+                }
+                else {
+                    Console.WriteLine("Insuficient Balance");
+                }
+            }
+            else {
+                Console.WriteLine("Invalid Amount");
+            }
+        }
+        public void Transfer(int amount, Account a) {
+            if (amount > 0) {
+                if (balance > amount) {
+                    a.Balance = a.Balance + amount;
+                    Balance = Balance - amount;
+                    Console.WriteLine("After transfering " + amount + " from " + AccName + " to " + a.AccName);
+                    Console.WriteLine("New Account Balance of Account " + AccName + ": " + Balance);
+                    Console.Write("New Account Balance of Account " + a.AccName + ": " + a.Balance);
+
+                }
+                else {
+                    Console.WriteLine("Insuficient Balance");
+                }
+            }
+            else {
+                Console.WriteLine("Invalid Amount");
+            }
+        }
+// Main Function
+        static void Main(string[] args) {
+            Account a1 = new Account();
+            a1.AccName = "Abcd";
+            a1.Acid = "1234";
+            a1.Balance = 50000;
+
+            Console.WriteLine("Account Name: " + a1.AccName);
+            Console.WriteLine("Account Id: " + a1.Acid);
+            Console.WriteLine("Account Balance: " + a1.Balance);
+            a1.Deposite(5000);
+            Console.WriteLine("Account Balance: " + a1.Balance);
+            a1.Withdraw(10000);
+            Console.WriteLine("Account Balance: " + a1.Balance);
+            Console.WriteLine("------------------------------------------");
+
+            Account a2 = new Account("XYZ", "678", 10000);
+
+            Console.WriteLine("Account Name: " + a2.AccName);
+            Console.WriteLine("Account Id: " + a2.Acid);
+            Console.WriteLine("Account Balance: " + a2.Balance);
+            a2.Deposite(10000);
+            Console.WriteLine("Account Balance: " + a2.Balance);
+            a2.Withdraw(5000);
+            Console.WriteLine("Account Balance: " + a2.Balance);
+            Console.WriteLine("------------------------------------------");
+            a1.Transfer(5000, a2);
+            Console.WriteLine("------------------------------------------");
+            Console.ReadKey();
+        }
+    }
+}
+

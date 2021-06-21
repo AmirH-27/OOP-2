@@ -1,0 +1,278 @@
+Lab Task 1
+
+------------------------------------------------------Task 1------------------------------------------------------
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Task_1 {
+    class Student {
+        private string name;
+        private string id;
+        private string department;
+        private float cgpa;
+
+        public string Name { get; set; }
+        public string Id { get; set; }
+        public string Department { get; set; }
+        public float CGPA { get; set; }
+
+        public void ShowInfo() {
+            Console.WriteLine("Student Id: " + Id);
+            Console.WriteLine("Student Name: " + Name);
+            Console.WriteLine("Student Department: " + Department);
+            Console.WriteLine("Student Cgpa: " + CGPA);
+        }
+
+        static void Main(string[] args) {
+            Student s1 = new Student();
+            s1.Id = "19-41429-3";
+            s1.Name = "Amir";
+            s1.Department = "CSE";
+            s1.CGPA = (float)3.88;
+
+            s1.ShowInfo();
+
+            Console.WriteLine();
+            Console.ReadKey();
+        }
+    }
+}
+
+------------------------------------------------------Task 2------------------------------------------------------
+
+using System;
+
+namespace Task_2 {
+    class Triangle {
+        private int x, y, z;
+        public int X {
+            set {
+                if (value > 0) {
+                    this.x = value;
+                }
+            }
+            get {
+                return x;
+            }
+        }
+
+        public int Y {
+            set {
+                if (value > 0) {
+                    this.y = value;
+                }
+            }
+            get {
+                return y;
+            }
+        }
+
+        public int Z {
+            set {
+                if (value > 0) {
+                    this.z = value;
+                }
+            }
+            get {
+                return z;
+            }
+        }
+
+        public void ShowInfo() {
+            Console.WriteLine("The Value of x = " + X);
+            Console.WriteLine("The Value of y = " + Y);
+            Console.WriteLine("The Value of z = " + Z);
+        }
+
+        public void TestTriangle() {
+            if(X==Y && Y == Z) {
+                Console.WriteLine("The triangle is Equilateral");
+            }
+            else if(X==Y || Y==Z || X == Z) {
+                Console.WriteLine("The triangle is Isosceles");
+            }
+            else if(X!=Y && Y != Z) {
+                Console.WriteLine("The triangle is Scalene");
+            }
+        }
+
+        static void Main(string[] args) {
+            Triangle t1 = new Triangle();
+            t1.X = 10;
+            t1.Y = 10;
+            t1.Z = 10;
+
+            t1.ShowInfo();
+            Console.WriteLine();
+            t1.TestTriangle();
+            Console.WriteLine();
+
+            Triangle t2 = new Triangle();
+            t2.X = 11;
+            t2.Y = 11;
+            t2.Z = 10;
+
+            t2.ShowInfo();
+            Console.WriteLine();
+            t2.TestTriangle();
+            Console.WriteLine();
+
+            Triangle t3 = new Triangle();
+            t3.X = 10;
+            t3.Y = 12;
+            t3.Z = 9;
+
+            t3.ShowInfo();
+            Console.WriteLine();
+            t3.TestTriangle();
+        }
+    }
+}
+
+------------------------------------------------------Task 3------------------------------------------------------
+using System;
+
+namespace Task_3 {
+    class Account {
+        private string accName;
+        private string acid;
+        private int balance;
+
+        public string AccName {
+            set {
+                if (value != null) {
+                    this.accName = value;
+                }
+            }
+            get {
+                return accName;
+            }
+        }
+        public string Acid {
+            set {
+                if (value != null) {
+                    this.acid = value;
+                }
+                else {
+                    Console.WriteLine("Invalid Input");
+                }
+            }
+            get {
+                return acid;
+            }
+        }
+        public int Balance {
+            set {
+                if (value != 0) {
+                    this.balance = value;
+                }
+            }
+            get {
+                return balance;
+            }
+        }
+
+        public void Deposite(int amount) {
+            Balance = Balance + amount;
+            Console.Write("After depositing " + amount + " new ");
+        }
+
+        public void Withdraw(int amount) {
+            Balance = Balance - amount;
+            Console.Write("After withdrawing " + amount + " new ");
+        }
+
+        static void Main(string[] args) {
+            Account a1 = new Account();
+            a1.AccName = "A";
+            a1.Acid = "1134";
+            a1.Balance = 5000;
+
+            Console.WriteLine("Account Name: " + a1.AccName);
+            Console.WriteLine("Account Id: " + a1.Acid);
+            Console.WriteLine("Account Balance: " + a1.Balance);
+
+            a1.Deposite(1000);
+            Console.WriteLine("Account Balance: " + a1.Balance);
+
+            a1.Withdraw(500);
+            Console.WriteLine("Account Balance: " + a1.Balance);
+            Console.WriteLine();
+
+            Account a2 = new Account();
+            a2.AccName = "B";
+            a2.Acid = "1125";
+            a2.Balance = 50000;
+
+            Console.WriteLine("Account Name: " + a2.AccName);
+            Console.WriteLine("Account Id: " + a2.Acid);
+            Console.WriteLine("Account Balance: " + a2.Balance);
+
+            a2.Deposite(10000);
+            Console.WriteLine("Account Balance: " + a2.Balance);
+
+            a2.Withdraw(5000);
+            Console.WriteLine("Account Balance: " + a2.Balance);
+            Console.WriteLine();
+        }
+    }
+}
+
+------------------------------------------------------Task 4------------------------------------------------------
+using System;
+
+namespace Course {
+    class Course {
+        private string courseName;
+        private string courseCode;
+        private int courseCredit;
+        public string CourseName {
+            set {
+                if (value != null) {
+                    this.courseName = value;
+                }
+            }
+            get {
+                return courseName;
+            }
+        }
+        public string CourseCode {
+            set {
+                if (value != null) {
+                    this.courseCode = value;
+                }
+            }
+            get {
+                return courseCode;
+            }
+        }
+        public int CourseCredits {
+            set {
+                if (value != 0) {
+                    this.courseCredit = value;
+                }
+            }
+            get {
+                return courseCredit;
+            }
+        }
+
+        public void ShowCourseInfo() {
+            Console.WriteLine("Course Name: " + CourseName);
+            Console.WriteLine("Course Code: " + CourseCode);
+            Console.WriteLine("Course Credits: " + CourseCredits);
+        }
+        static void Main(string[] args) {
+            Course c1 = new Course();
+            c1.CourseName = "OOP-2";
+            c1.CourseCode = "00201";
+            c1.CourseCredits = 3;
+
+            c1.ShowCourseInfo();
+        }
+    }
+}
+
