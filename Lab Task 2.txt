@@ -126,14 +126,6 @@ namespace LabTask2 {
 }
 
 
-
-
-
-
-
-
-
-
 Task-2
 --------------Book--------------
 using System;
@@ -263,18 +255,6 @@ namespace Lab_Task_2 {
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 Task-3
@@ -418,6 +398,8 @@ namespace Task_3 {
         }
     }
 }
+
+
 Task-4
 --------------Course --------------
 using System;
@@ -494,24 +476,6 @@ namespace Task_4 {
     }
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 Task-5
@@ -655,6 +619,8 @@ namespace Task_5 {
         }
     }
 }
+
+
 Task-6
 --------------Library--------------
 using Lab_Task_2;
@@ -787,6 +753,8 @@ namespace Task_6 {
         }
     }
 }
+
+
 Task-7
 --------------AddressBook--------------
 using System;
