@@ -1,0 +1,903 @@
+Lab Task 2
+Task-1
+                 --------------Account--------------
+using System;
+
+namespace LabTask2 {
+    class Account {
+        private string accName;
+        private string acid;
+        private int balance;
+        public Account() {
+            Console.WriteLine("Object Created Form empty Constructor");
+        }
+        public Account(string aName, string aId, int amount) {
+            Console.WriteLine("Object Created Form parameterised Constructor");
+            AccName = aName;
+            Acid = aId;
+            Balance = amount;
+        }
+        public string AccName {
+            set {
+                if (value != null) {
+                    this.accName = value;
+                }
+            }
+            get {
+                return accName;
+            }
+        }
+        public string Acid {
+            set {
+                if (value != null) {
+                    this.acid = value;
+                }
+                else {
+                    Console.WriteLine("Invalid Input");
+                }
+            }
+            get {
+                return acid;
+            }
+        }
+        public int Balance {
+            set {
+                if (value != 0) {
+                    this.balance = value;
+                }
+            }
+            get {
+                return balance;
+            }
+        }
+
+        public void Deposite(int amount) {
+            if (amount > 0) {
+                Balance = Balance + amount;
+                Console.Write("After depositing " + amount + " new ");
+            }
+            else {
+                Console.WriteLine("Invalid Input");
+            }
+        }
+        public void Withdraw(int amount) {
+            if (amount > 0) {
+                if (balance > amount) {
+                    Balance = Balance - amount;
+                    Console.Write("After withdrawing " + amount + " new ");
+                }
+                else {
+                    Console.WriteLine("Insuficient Balance");
+                }
+            }
+            else {
+                Console.WriteLine("Invalid Amount");
+            }
+        }
+        public void Transfer(int amount, Account a) {
+            if (amount > 0) {
+                if (balance > amount) {
+                    a.Balance = a.Balance + amount;
+                    Balance = Balance - amount;
+                    Console.WriteLine("After transfering " + amount + " from " + AccName + " to " + a.AccName);
+                    Console.WriteLine("New Account Balance of Account " + AccName + ": " + Balance);
+                    Console.Write("New Account Balance of Account " + a.AccName + ": " + a.Balance);
+
+                }
+                else {
+                    Console.WriteLine("Insuficient Balance");
+                }
+            }
+            else {
+                Console.WriteLine("Invalid Amount");
+            }
+        }
+// Main Function
+        static void Main(string[] args) {
+            Account a1 = new Account();
+            a1.AccName = "Abcd";
+            a1.Acid = "1234";
+            a1.Balance = 50000;
+
+            Console.WriteLine("Account Name: " + a1.AccName);
+            Console.WriteLine("Account Id: " + a1.Acid);
+            Console.WriteLine("Account Balance: " + a1.Balance);
+            a1.Deposite(5000);
+            Console.WriteLine("Account Balance: " + a1.Balance);
+            a1.Withdraw(10000);
+            Console.WriteLine("Account Balance: " + a1.Balance);
+            Console.WriteLine("------------------------------------------");
+
+            Account a2 = new Account("XYZ", "678", 10000);
+
+            Console.WriteLine("Account Name: " + a2.AccName);
+            Console.WriteLine("Account Id: " + a2.Acid);
+            Console.WriteLine("Account Balance: " + a2.Balance);
+            a2.Deposite(10000);
+            Console.WriteLine("Account Balance: " + a2.Balance);
+            a2.Withdraw(5000);
+            Console.WriteLine("Account Balance: " + a2.Balance);
+            Console.WriteLine("------------------------------------------");
+            a1.Transfer(5000, a2);
+            Console.WriteLine("------------------------------------------");
+            Console.ReadKey();
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+Task-2
+--------------Book--------------
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Lab_Task_2 {
+    public class Book {
+        private string bookName;
+        private string bookAuthor;
+        private string bookId;
+        private string bookType;
+        private int bookCopy;
+
+        public static int counter = 0;
+
+        public Book() {
+            Console.WriteLine("Object Created from an empty Constructor");
+            counter++;
+        }
+
+        public Book(string bookN, string bookA, string bookI, string bookTy, int nOfCopies) {
+            Console.WriteLine("Object Created from an Parameterised Constructor");
+            BookName = bookN;
+            BookAuthor = bookA;
+            BookId = bookI;
+            BookType = bookTy;
+            BookCopy = nOfCopies;
+            counter++;
+        }
+
+        public string BookName {
+            set {
+                if (value != null) {
+                    this.bookName = value;
+                }
+            }
+            get {
+                return bookName;
+            }
+        }
+
+        public string BookAuthor {
+            set {
+                if (value != null) {
+                    this.bookAuthor = value;
+                }
+            }
+            get {
+                return bookAuthor;
+            }
+        }
+
+        public string BookId {
+            set {
+                if (value != null) {
+                    this.bookId= value;
+                }
+            }
+            get {
+                return bookId;
+            }
+        }
+
+        public string BookType {
+            set {
+                if (value != null) {
+                    this.bookType = value;
+                }
+            }
+            get {
+                return bookType;
+            }
+        }
+
+        public int BookCopy {
+            set {
+                if (value != 0) {
+                    this.bookCopy = value;
+                }
+            }
+            get {
+                return bookCopy;
+            }
+        }
+        public void ShowInfo() {
+            Console.WriteLine("Book Name: " + BookName);
+            Console.WriteLine("Book Author: " + BookAuthor);
+            Console.WriteLine("Book Id: " + BookId);
+            Console.WriteLine("Book Type: " + BookType);
+            Console.WriteLine("Book Copies: " + BookCopy);
+        }
+
+        public void AddBookCopy(int x) {
+            BookCopy += x;
+        }
+        static void showTotalBookInfo() {
+            Console.WriteLine("Number of Books: " + counter);
+        }
+        static void Main(string[] args) {
+            int noOfCopiesAdded = 50;
+            Book b1 = new Book();
+            b1.BookName = "Harry Potter";
+            b1.BookAuthor = "J. K. Rowling";
+            b1.BookId = "000233";
+            b1.BookType = "Thriller";
+            b1.BookCopy = 100;
+
+            b1.ShowInfo();
+
+            b1.AddBookCopy(noOfCopiesAdded);
+
+            Console.WriteLine("After Adding {0} copies of {1} the total number of copies are {2}", noOfCopiesAdded, b1.bookName, b1.BookCopy);
+
+            Console.WriteLine("----------------------------------------");
+            Book b2 = new Book("The Witcher", "Andrzej Sapkowski", "000235", "Action", 200);
+
+            b2.ShowInfo();
+
+            b2.AddBookCopy(noOfCopiesAdded);
+            Console.WriteLine("After Adding {0} copies of {1} the total number of copies are {2}", noOfCopiesAdded, b2.bookName, b2.BookCopy);
+            Console.WriteLine("----------------------------------------");
+            showTotalBookInfo();
+            Console.ReadLine();
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Task-3
+--------------Contact--------------
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Task_3 {
+    public class Contact {
+        private string personName;
+        private string personId;
+        private int age;
+        private string mobileNumber;
+        private char gender;
+
+        public Contact() {
+            Console.WriteLine("Object Created from an Empty Constructor");
+        }
+
+        public Contact(string name, string id, int Age, string mobilenum, char Gender) {
+            Console.WriteLine("Object Created from a Parameterized Constructor");
+            PersonName = name;
+            PersonId = id;
+            PersonAge = Age;
+            PersonMobileNum = mobilenum;
+            PersonGender = Gender;
+        }
+
+        public string PersonName{
+            set {
+                if(value!= null) {
+                    this.personName = value;
+                }
+            }
+            get {
+                return personName;
+            }
+        }
+
+        public string PersonId {
+            set {
+                if (value != null) {
+                    this.personId = value;
+                }
+            }
+            get {
+                return personId;
+            }
+
+        }
+
+        public int PersonAge {
+            set {
+                if (value >= 18) {
+                    this.age = value;
+                }
+                else {
+                    Console.WriteLine("Under Aged");
+                }
+            }
+            get {
+                return age;
+            }
+
+        }
+
+        public string PersonMobileNum {
+            set {
+                if (value.Substring(0,3) == "017" || value.Substring(0, 3) == "018" || value.Substring(0, 3) == "016" || value.Substring(0, 3)== "019"){
+                    this.mobileNumber = value;
+                }
+                else {
+                    Console.WriteLine("Invalid Number");
+                }
+            }
+            get {
+                return mobileNumber;
+            }
+
+        }
+
+        public char PersonGender {
+            set {
+                if (value == 'M' || value == 'F') {
+                    this.gender = value;
+                }
+            }
+            get {
+                return gender;
+            }
+
+        }
+
+        public void showPersonInfo() {
+            Console.WriteLine("Person's Name: " + PersonName);
+            Console.WriteLine("Person's Id: " + PersonId);
+            Console.WriteLine("Person's Age: " + PersonAge);
+            Console.WriteLine("Person's Mobile Number: " + PersonMobileNum);
+            Console.WriteLine("Person's Gender: " + PersonGender);
+        }
+        public void detectNumber() {
+            if (PersonMobileNum.Substring(0, 3) == "017") {
+                Console.WriteLine("The User {0} uses a Gp sim", PersonName);
+            }
+            else if (PersonMobileNum.Substring(0, 3) == "019") {
+                Console.WriteLine("The User {0} uses a Banglalink sim", PersonName);
+            }
+            else if (PersonMobileNum.Substring(0, 3) == "018") {
+                Console.WriteLine("The User {0} uses a Robi sim", PersonName);
+            }
+            else if (PersonMobileNum.Substring(0, 3) == "016") {
+                Console.WriteLine("The User {0} uses a Airtle sim", PersonName);
+            }
+            else {
+                Console.WriteLine("Invalid Number");
+            }
+
+        }
+        static void Main(string[] args) {
+
+            Contact c1 = new Contact();
+           
+            c1.PersonName = "Amir";
+            c1.PersonId = "19-41429-3";
+            c1.PersonAge = 21;
+            c1.PersonMobileNum = "01682017658";
+            c1.PersonGender = 'M';
+
+            c1.showPersonInfo();
+            Console.WriteLine("----------------------------------------------");
+            Contact c2 = new Contact("Habib", "1234", 18, "0174232110", 'M');
+            c2.showPersonInfo(); 
+            Console.WriteLine("----------------------------------------------");
+
+            c1.detectNumber();
+            c2.detectNumber();
+            Console.ReadLine();
+        }
+    }
+}
+Task-4
+--------------Course --------------
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Task_4 {
+    class Course {
+        private string courseName;
+        private string courseCode;
+        private int courseCredit;
+
+        public Course() {
+            Console.WriteLine("Object Created from an Empty Constructor");
+        }
+
+        public Course(string name, string code, int credits) {
+            Console.WriteLine("Object Created from a Parameterized Constructor");
+            CourseName = name;
+            CourseCode = code;
+            CourseCredits = credits;
+        }
+        public string CourseName {
+            set {
+                if (value != null) {
+                    this.courseName = value;
+                }
+            }
+            get {
+                return courseName;
+            }
+        }
+        public string CourseCode {
+            set {
+                if (value != null) {
+                    this.courseCode = value;
+                }
+            }
+            get {
+                return courseCode;
+            }
+        }
+        public int CourseCredits {
+            set {
+                if (value != 0) {
+                    this.courseCredit = value;
+                }
+            }
+            get {
+                return courseCredit;
+            }
+        }
+
+        public void ShowCourseInfo() {
+            Console.WriteLine("Course Name: " + CourseName);
+            Console.WriteLine("Course Code: " + CourseCode);
+            Console.WriteLine("Course Credits: " + CourseCredits);
+        }
+        static void Main(string[] args) {
+            Course c1 = new Course();
+            c1.CourseName = "OOP-2";
+            c1.CourseCode = "CSE 2210";
+            c1.CourseCredits = 3;
+            c1.ShowCourseInfo();
+
+            Console.WriteLine("-----------------------------------");
+
+            Course c2 = new Course("OOP-1", "CSE 1205", 3);
+            c2.ShowCourseInfo();
+            Console.ReadKey();
+        }
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Task-5
+-------------Mobile-------------
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Task_5 {
+    class Mobile {
+        string mobileOwnerName;
+        string mobileNumber;
+        string mobileBalance;
+        string mobileOSName;
+        bool locked = true ; // lock is a keyword so it cannot be used as a name of a variable 
+
+        public Mobile() {
+            Console.WriteLine("Object Created from an Empty Constructor");
+        }
+
+        public Mobile(string name, string num, string balanc, string OsName, bool l) {
+            Console.WriteLine("Object Created from an Parameterised Constructor");
+            MobileOwner = name;
+            MobileNumber = num;
+            MobileBalance = balanc;
+            MobileOsName = OsName;
+            Locked = l;
+        }
+
+        public string MobileOwner {
+            set {
+                if(value != null) {
+                    this.mobileOwnerName = value;
+                }
+            }
+            get {
+                return mobileOwnerName;
+            }
+        }
+
+        public string MobileNumber {
+            set {
+                if (value != null) {
+                    this.mobileNumber = value;
+                }
+            }
+            get {
+                return mobileNumber;
+            }
+        }
+
+        public string MobileBalance {
+            set {
+                if (value != null) {
+                    this.mobileBalance = value;
+                }
+            }
+            get {
+                return mobileBalance;
+            }
+        }
+
+        public string MobileOsName {
+            set {
+                if (value != null) {
+                    this.mobileOSName = value;
+                }
+            }
+            get {
+                return mobileOSName;
+            }
+        }
+
+        public bool Locked { get; set; }
+
+        public void showInfo() {
+            Console.WriteLine("Mobile Owner: " + MobileOwner);
+            Console.WriteLine("Mobile Number: " + MobileNumber);
+            Console.WriteLine("Mobile Balance: " + MobileBalance);
+            Console.WriteLine("Mobile Os: " + MobileOsName);
+            Console.WriteLine("Mobile Lock Status: " + Locked);
+        }
+
+        public void Recharge(int amount) {
+            if (Locked == false) {
+                int temp;
+                temp = Convert.ToInt32(MobileBalance);
+
+                temp += amount;
+
+                MobileBalance = Convert.ToString(temp);
+
+                Console.WriteLine("After recharging {0}Tk new balance is {1} ", amount, MobileBalance);
+            }
+            else {
+                Console.WriteLine("Mobile is Locked");
+            }
+        }
+
+        public void CallSomeone(int timeDuration) {
+            if(Locked == false) {
+                int temp, cost;
+                cost = timeDuration * 1;
+                temp = Convert.ToInt32(MobileBalance);
+
+                temp -= timeDuration;
+
+                MobileBalance = Convert.ToString(temp);
+                Console.WriteLine("Call duration was {0} mins. Cost of call {1}. New balance {2}", timeDuration, cost, MobileBalance);
+            }
+            else {
+                Console.WriteLine("Mobile is Locked");
+            }
+        }
+
+        static void Main(string[] args) {
+            Mobile m1 = new Mobile();
+            m1.MobileOwner = "Amir";
+            m1.MobileNumber = "01642321180";
+            m1.MobileBalance = "200";
+            m1.MobileOsName = "IOS 14";
+            m1.Locked = true;
+
+            m1.showInfo();
+            Console.WriteLine();
+            m1.Locked = false;
+            m1.Recharge(50);
+            m1.CallSomeone(10);
+            Console.WriteLine("-----------------------------------------");
+
+            Mobile m2 = new Mobile("Habib", "01682017658", "500", "Android 11", true);
+            m2.showInfo();
+            Console.WriteLine();
+            m2.Locked = false;
+            m2.Recharge(50);
+            m2.CallSomeone(120);
+
+            Console.ReadKey();
+        }
+    }
+}
+Task-6
+--------------Library--------------
+using Lab_Task_2;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Task_6 {
+    class Library {
+        private string libName;
+        private string libAddress;
+        Book[] listOfBook;
+        int totalBook;
+
+        public Library() {
+            Console.WriteLine("Object Created from an Empty Constructor");
+        }
+        public Library(string name, string add, Book[] list, int total) {
+            Console.WriteLine("Object Created from an Parameterised Constructor");
+            LibName = name;
+            LibAddress = add;
+            ListOfBooks = list;
+            TotalBooks = total;
+        }
+
+        public string LibName {
+            set {
+                if(value!= null) {
+                    this.libName = value;
+                }
+            }
+            get {
+                return libName;
+            }
+        }
+        public string LibAddress {
+            set {
+                if (value != null) {
+                    this.libAddress = value;
+                }
+            }
+            get {
+                return libAddress;
+            }
+        }
+        public Book[] ListOfBooks {
+            set {
+                this.listOfBook = value;             
+            }
+            get {
+                return listOfBook;
+            }
+            
+        }
+        public int TotalBooks {
+            set {
+                this.totalBook = value;
+            }
+            get {
+                return totalBook;
+            }
+        }
+
+        public void showInfo() {
+            Console.WriteLine("Library Name: " + LibName);
+            Console.WriteLine("Library Address: " + LibAddress);
+            Console.WriteLine("Library Books: ");
+            foreach (Book i in ListOfBooks) {
+                Console.WriteLine("             Book Name: " + i.BookName);
+                Console.WriteLine("             Book Author: " + i.BookAuthor);
+                Console.WriteLine("             Book Id: " + i.BookId);
+                Console.WriteLine("             Book Type: " + i.BookType);
+                Console.WriteLine("             Book Copies: " + i.BookCopy);
+                Console.WriteLine("-----------------------------------------------------");
+            }
+        }
+
+        public void AddNewBook(Book book) {
+            var temp = ListOfBooks.ToList();// converting listof book array to array list 
+            temp.Add(book);//adding a new element (book object) into the list
+            ListOfBooks = temp.ToArray();// converting the list back to array 
+          
+        }
+
+        public void DeleteBook(Book book) {
+            var temp = ListOfBooks.ToList();// converting listof book array to array list
+            foreach (var i in ListOfBooks) { 
+                if (i.BookName.Equals( book.BookName)) {
+                    TotalBooks -= i.BookCopy;//delete the number of books from the totalbooks
+                    temp.Remove(i);//deleting the element (book object) from the list
+                }
+            }
+            ListOfBooks = temp.ToArray();// converting the list back to array
+        }
+
+        public void AddNewBookCopy(Book book, int copy) {
+            book.BookCopy += copy;
+            TotalBooks += book.BookCopy;
+            Console.WriteLine("Total number of {0} Books after adding {1} books the total books are: {2} " , book.BookName,copy, book.BookCopy);
+            Console.WriteLine("Total Number of Books Inside the Library are: " + TotalBooks);
+        }
+
+        static void Main(string[] args) {
+            Book[] b = new Book[3];
+            b[0] = new Book("The Witcher", "Andrzej Sapkowski", "000235", "Action", 200);
+            b[1] = new Book("God Of War", "Andrzej Sapkowski", "000240", "Thriller", 300);
+            b[2] = new Book("Thor", "Andrzej Sapkowski", "003240", "Action-Thriller", 600);
+
+            Library l1 = new Library();
+            l1.LibName = "Library";
+            l1.LibAddress = "Dhaka";
+            l1.ListOfBooks = b;    
+            l1.TotalBooks = 0;
+            l1.AddNewBookCopy(b[0], b[0].BookCopy);
+            l1.AddNewBookCopy(b[1], b[1].BookCopy);
+            l1.AddNewBookCopy(b[2], b[2].BookCopy);
+            l1.showInfo();
+
+            Book b1 = new Book("Harry Potter", "J. K. Rowling", "000233", "Thriller", 100);
+            l1.AddNewBook(b1);
+            l1.DeleteBook(b[0]);
+            l1.showInfo();
+            //Console.WriteLine("-----------------------------------------------------");
+            l1.AddNewBookCopy(b1, 500);
+
+            Console.ReadKey();
+
+        }
+    }
+}
+Task-7
+--------------AddressBook--------------
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Task_3;
+
+namespace Task_7 {
+    class AddressBook {
+        private string ownerName;
+        private string info;
+        Contact[] listOfContact;
+
+        public AddressBook() {
+            Console.WriteLine("Object Created from an Empty Constructor");
+        }
+        public AddressBook(string name, string info, Contact[] c) {
+            Console.WriteLine("Object Created from a parameterised Constructor");
+
+        }
+        public string OwnerName {
+            set {
+                if (value != null) {
+                    this.ownerName = value;
+                }
+            }
+            get {
+                return ownerName;
+            }
+        }
+        public string Info {
+            set {
+                if (value != null) {
+                    this.info= value;
+                }
+            }
+            get {
+                return info;
+            }
+        }
+
+        public Contact[] ListOfContacts {
+            set {
+                this.listOfContact= value;
+            }
+            get {
+                return listOfContact;
+            }
+        }
+        public void showAllContact() {
+            Console.WriteLine();
+            Console.WriteLine("Owner's Name: " + OwnerName);
+            Console.WriteLine("Owner's Info: " + Info);
+            Console.WriteLine("Owner's Contacts: ");
+           
+            foreach (Contact i in ListOfContacts) {
+                Console.WriteLine("                Person's Name: " + i.PersonName);
+                Console.WriteLine("                Person's Id: " + i.PersonId);
+                Console.WriteLine("                Person's Age: " + i.PersonAge);
+                Console.WriteLine("                Person's Mobile Number: " + i.PersonMobileNum);
+                Console.WriteLine("                Person's Gender: " + i.PersonGender);
+                Console.WriteLine("------------------------------------------------------");
+            }
+        }
+        public void AddConctact(Contact con) {
+            var temp = ListOfContacts.ToList();// converting listof book array to array list 
+            temp.Add(con);//adding a new element (contact object) into the list
+            ListOfContacts = temp.ToArray();// converting the list back to array 
+
+        }
+        public void DeleteContact(Contact con) {
+            var temp = ListOfContacts.ToList();// converting listof book array to array list
+            foreach (var i in ListOfContacts) {
+                if (i.PersonName.Equals(con.PersonName)) {
+                    temp.Remove(i);//deleting the element (contact object) from the list
+                }
+            }
+            ListOfContacts = temp.ToArray();// converting the list back to array
+        }
+        static void Main(string[] args) {
+            Contact[]c = new Contact[3];
+            c[0] = new Contact();
+            c[0].PersonName = "Amir";
+            c[0].PersonId = "19-41429-3";
+            c[0].PersonAge = 21;
+            c[0].PersonMobileNum = "01682017658";
+            c[0].PersonGender = 'M';
+
+            c[1] = new Contact("Lafi", "12567", 25, "0173452110", 'M');
+            c[2] = new Contact("Habib", "1234", 18, "0174232110", 'M');
+
+            AddressBook a1 = new AddressBook();
+            a1.OwnerName = "Zamir";
+            a1.Info = "Friend";
+            a1.ListOfContacts = c;
+
+            a1.showAllContact();
+
+            Contact c1 = new Contact("Hossain", "20987", 29, "0174232330", 'M');
+
+            a1.AddConctact(c1);
+            a1.showAllContact();
+
+            a1.DeleteContact(c[2]);
+
+            Console.ReadLine();
+
+        }
+    }
+}
+
+
