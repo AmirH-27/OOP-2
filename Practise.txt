@@ -1,0 +1,65 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Practice {
+    class Product {
+        private int productId;
+        private string name;
+        private double price;
+
+        public int ID{ get; set; }
+        public string Name { get; set; }
+
+        public double Price { get; set; }
+
+        public void PrintInfo() {
+            Console.Write("Product Id: " + ID);
+            Console.Write("Product Name: " + Name);
+            Console.Write("Product Price: " + Price);
+        }
+    }
+    class SuperShop {
+        public Product[] productArray = new Product[5];
+
+        public static Product GetExpensiveProduct(Product[] array) {
+            double max = array[0].Price;
+            Product p = new Product();
+            for (int i = 0; i < array.Length; i++) {
+                if (array[i].Price > max) {
+                    max = array[i].Price;
+                }
+            }
+            for (int i = 0; i < array.Length; i++) {
+                if (max == array[i].Price) {
+                    p = array[i];
+                }
+            }
+            Console.WriteLine("Most expensive product");
+            return p;
+        }
+        static void Main(string[] args) {
+            Product[] p = new Product[5];
+            for (int i = 0; i < p.Length; i++) {
+                p[i] = new Product();
+                Console.Write("Enter Id: ");
+                p[i].ID = Convert.ToInt32(Console.ReadLine());
+                Console.Write("Enter Name: ");
+                p[i].Name = Console.ReadLine();
+                Console.Write("Enter Price: ");
+                p[i].Price = Convert.ToDouble(Console.ReadLine());
+                Console.WriteLine("--------------------------------------------------");
+            }
+
+            for (int i = 0; i < p.Length; i++) {
+                p[i].PrintInfo();
+                Console.WriteLine("--------------------------------------------------");
+            }
+
+            GetExpensiveProduct(p).PrintInfo();
+            Console.ReadKey();
+        }
+    }
+}
