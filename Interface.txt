@@ -1,0 +1,460 @@
+//Interface
+//BasicCalCulatorInterface
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Interface {
+    interface BasicCalculatorInterface {
+        int sum(int x, int y);
+        int sub(int x, int y);
+        int multiplication(int x, int y);
+        int division(int x, int y);
+    }
+}
+//ScientificCalCulatorInterface
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Interface {
+    interface ScientificCalculatorInterface {
+        int XtoY(int x, int y);
+        int root(int x, int y);
+        void MatrixAdd(int[,] mat1, int[,] mat2);
+        void MatrixSub(int[,] mat1, int[,] mat2);
+        void MatrixMultiplication(int[,] mat1, int[,] mat2);
+        void MatrixTranspose(int[,] mat1);
+        void Polynomial(int a, int b, int c);
+        void table(int start, int end, int step, int coeffOfX, int coeffOfY);
+    }
+}
+//Calculator class which implements both the interface
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Interface {
+    
+class Calculator : BasicCalculatorInterface, ScientificCalculatorInterface {
+        public int sum(int x, int y) {
+            return x + y;
+        }
+        public int sub(int x, int y) {
+            return x - y;
+        }
+        public int multiplication(int x, int y) {
+            return x * y;
+        }
+        public int division(int x, int y) {
+            return x / y;
+        }
+        public int XtoY(int x, int y) {
+            if (y == 0)
+                return 1;
+            else
+                return x * XtoY(x, y - 1);
+        }
+        public int root(int x, int y) {
+            int i = 0;
+            int root = 1;
+            if (x > 0) {
+                while (true) {
+                    i = i + 1;
+                    root = (x / root + root) / y;
+                    if (i == x + 1) { 
+                        break; 
+                    }
+                }
+                return root;
+            }
+            else{
+                return 0;
+            }
+        }
+        public void PrintMatrix(int[,] mat1) {
+            for(int i = 0; i< mat1.GetLength(0); i++) {
+                for (int j = 0; j < mat1.GetLength(1); j++) {
+                    Console.Write(mat1[i, j] + " ");
+                }
+                Console.WriteLine();
+            }
+            Console.WriteLine("-----------------------------");
+        }
+        public void MatrixAdd(int[,] mat1, int[,] mat2) {
+            int row1 = mat1.GetLength(0);
+            int row2 = mat2.GetLength(0);
+            int col1 = mat1.GetLength(1);
+            int col2 = mat2.GetLength(1);
+            Console.WriteLine("Matrix 1: ");
+            PrintMatrix(mat1);
+            Console.WriteLine("Matrix 2: ");
+            PrintMatrix(mat2);
+
+            if (row1 == row2 && col1 == col2) {
+                int[,] temp = new int [row1, col1];
+                for(int i = 0; i < row1; i++) {
+                    for(int j = 0;j<col1; j++) {
+                        temp[i, j] = mat1[i, j] + mat2[i, j];
+                    }
+                }
+                Console.WriteLine("Addtion of Matrix 1 & 2: ");
+                PrintMatrix(temp);
+            }
+            else {
+                Console.WriteLine("Invalid Input Rows and Coloumn of Matrix 1 & 2 must be equal");
+            }
+        }
+        public void MatrixSub(int[,] mat1, int[,] mat2) {
+            int row1 = mat1.GetLength(0);
+            int row2 = mat2.GetLength(0);
+            int col1 = mat1.GetLength(1);
+            int col2 = mat2.GetLength(1);
+            Console.WriteLine("Matrix 1: ");
+            PrintMatrix(mat1);
+            Console.WriteLine("Matrix 2: ");
+            PrintMatrix(mat2);
+
+            if (row1 == row2 && col1 == col2) {
+                int[,] temp = new int[row1, col1];
+                for (int i = 0; i < row1; i++) {
+                    for (int j = 0; j < col1; j++) {
+                        temp[i, j] = mat1[i, j] - mat2[i, j];
+                    }
+                }
+                Console.WriteLine("Subtraction of Matrix 1 & 2: ");
+                PrintMatrix(temp);
+            }
+            else {
+                Console.WriteLine("Invalid Input Rows and Coloumn of Matrix 1 & 2 must be equal");
+            }
+        }
+        public void MatrixMultiplication(int[,] mat1, int[,] mat2) {
+            int row1 = mat1.GetLength(0);
+            int row2 = mat2.GetLength(0);
+            int col1 = mat1.GetLength(1);
+            int col2 = mat2.GetLength(1);
+            Console.WriteLine("Matrix 1: ");
+            PrintMatrix(mat1);
+            Console.WriteLine("Matrix 2: ");
+            PrintMatrix(mat2);
+
+            if (col1 == row2) {
+                int[,] temp = new int[row1, col2];
+                for (int i = 0; i < row1; i++) {
+                    for (int j = 0; j < col2; j++) {
+                        for (int k = 0; k < col1; k++) {
+                            temp[i, j] += mat1[i, k] * mat2[k, j];
+                        }
+                    }
+                }
+                Console.WriteLine("Multiplication of Matrix 1 & 2: ");
+                PrintMatrix(temp);
+            }
+            else {
+                Console.WriteLine("Invalid Input number of Rows in the 2nd matrix should be equal to number of Coloumns of 1st matrix...");
+            }
+        }
+        public void MatrixTranspose(int[,] mat1) {
+            int row1 = mat1.GetLength(0);
+            int col1 = mat1.GetLength(1);
+            Console.WriteLine("Matrix: ");
+            PrintMatrix(mat1);
+            int[,] temp = new int[col1, row1];
+            for (int i = 0; i < row1; i++) {
+                for (int j = 0; j < col1; j++) {
+                    temp[j, i] = mat1[i, j];
+                }
+            }
+            Console.WriteLine("Transpose of Matrix: ");
+            PrintMatrix(temp);
+            
+        }
+        public void Polynomial(int a, int b, int c) {
+            int x1,x2;
+            x1= (-b + root((XtoY(b, 2) - 4 * a * c), 2))/(2*a);
+            x2 =( -b - root((XtoY(b, 2) - 4 * a * c), 2))/(2 * a);
+            Console.WriteLine("Value of x1: " + x1);
+            Console.WriteLine("Value of x2: " + x2);
+            Console.WriteLine("-----------------------------");
+        }
+        public void table(int start, int end, int step, int coeffOfX, int coeffOfY) {
+            int temp;
+            for (int i = start; i <= end; i+=step) {
+                temp = (coeffOfX * i) / coeffOfY;
+                Console.WriteLine("X: {0} | Y: {1}", i, temp);
+            }
+            Console.WriteLine("-----------------------------");
+        }
+     
+    }
+}
+//Driver class or main class
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Interface {
+    class Start {
+        public static void MenuForBasic() {
+            Console.WriteLine("1. Addition");
+            Console.WriteLine("2. Subtraction");
+            Console.WriteLine("3. Multiplication");
+            Console.WriteLine("4. Division");
+            Console.WriteLine("5. Go Back");
+            Console.WriteLine("-----------------------------");
+        }
+        public static void MenuForScientific() {
+            Console.WriteLine("1. Power");
+            Console.WriteLine("2. Root");
+            Console.WriteLine("3. Matrix");
+            Console.WriteLine("4. Polynomial");
+            Console.WriteLine("5. Table");
+            Console.WriteLine("6. Go Back");
+            Console.WriteLine("-----------------------------");
+        }
+        public static void MenuForMatrix() {
+            Console.WriteLine("1. Addition Matrix");
+            Console.WriteLine("2. Subtraction Matrix");
+            Console.WriteLine("3. Multiplication Matrix");
+            Console.WriteLine("4. Transpose Matrix");
+            Console.WriteLine("5. Go Back");
+            Console.WriteLine("-----------------------------");
+        }
+        public static void MenuForPolynomial() {
+            Console.WriteLine("1. ax^2 + bx + c");
+            Console.WriteLine("2. Go Back");
+            Console.WriteLine("-----------------------------");
+        }
+        static void Main(string[] args) {
+            int x, y, input, row = 0, coloum = 0;
+            int a, b, c, start, end, coeffOfx, coeffOfy, step;
+            Calculator c1 = new Calculator();
+            while (true) {
+                Console.WriteLine("1. Basic Calculator");
+                Console.WriteLine("2. Scientific Calculator");
+                Console.WriteLine("3. Exit");
+                Console.WriteLine("-----------------------------");
+                Console.Write("Enter your option: ");
+                input = Convert.ToInt32(Console.ReadLine());
+
+                if (input == 1) {
+                    while (true) {
+                        MenuForBasic();
+                        Console.Write("Enter your option: ");
+                        input = Convert.ToInt32(Console.ReadLine());
+                        if (input == 1) {
+                            Console.Write("Enter the 1st value you want to add: ");
+                            x = Convert.ToInt32(Console.ReadLine());
+                            Console.Write("Enter the 2nd value you want to add: ");
+                            y = Convert.ToInt32(Console.ReadLine());
+                            Console.WriteLine("Answer: " + c1.sum(x, y));
+                        }
+                        else if (input == 2) {
+                            Console.Write("Enter the 1st value you want to subtract: ");
+                            x = Convert.ToInt32(Console.ReadLine());
+                            Console.Write("Enter the 2nd value you want to subtract: ");
+                            y = Convert.ToInt32(Console.ReadLine());
+                            Console.WriteLine("Answer: " + c1.sub(x, y));
+                        }
+                        else if (input == 3) {
+                            Console.Write("Enter the 1st value you want to multiply: ");
+                            x = Convert.ToInt32(Console.ReadLine());
+                            Console.Write("Enter the 2nd value you want to multiply: ");
+                            y = Convert.ToInt32(Console.ReadLine());
+                            Console.WriteLine("Answer: " + c1.multiplication(x, y));
+                        }
+                        else if (input == 4) {
+                            Console.Write("Enter the 1st value you want to divide: ");
+                            x = Convert.ToInt32(Console.ReadLine());
+                            Console.Write("Enter the 2nd value you want to divide: ");
+                            y = Convert.ToInt32(Console.ReadLine());
+                            Console.WriteLine("Answer: " + c1.division(x, y));
+                        }
+                        else if (input == 5) {
+                            break;
+                        }
+                    }
+                }
+                else if (input == 2) {
+                    while (true) {
+                        MenuForScientific();
+                        input = Convert.ToInt32(Console.ReadLine());
+                        if (input == 1) {
+                            Console.Write("Enter the number: ");
+                            x = Convert.ToInt32(Console.ReadLine());
+                            Console.Write("Enter the power: ");
+                            y = Convert.ToInt32(Console.ReadLine());
+                            Console.WriteLine("Answer: " + c1.XtoY(x, y));
+                        }
+                        else if (input == 2) {
+                            Console.Write("Enter the number: ");
+                            x = Convert.ToInt32(Console.ReadLine());
+                            Console.Write("Enter the root: ");
+                            y = Convert.ToInt32(Console.ReadLine());
+                            Console.WriteLine("Answer: " + c1.root(x, y));
+                        }
+                        else if (input == 3) {
+                            MenuForMatrix();
+                            input = Convert.ToInt32(Console.ReadLine());
+                            if (input == 1) {
+                                Console.Write("Enter the number of rows for mat1: ");
+                                row = Convert.ToInt32(Console.ReadLine());
+                                Console.Write("Enter the number of coloums for mat1: ");
+                                coloum = Convert.ToInt32(Console.ReadLine());
+                                int[,] mat1 = new int[row, coloum];
+
+                                Console.Write("Enter the number of rows for mat2: ");
+                                row = Convert.ToInt32(Console.ReadLine());
+                                Console.Write("Enter the number of coloums for mat2: ");
+                                coloum = Convert.ToInt32(Console.ReadLine());
+                                int[,] mat2 = new int[row, coloum];
+                                Console.WriteLine("Enter the elements of Matrix 1:");
+                                for (int i = 0; i < row; i++) {
+                                    for (int j = 0; j < coloum; j++) {
+                                        mat1[i, j] = Convert.ToInt32(Console.ReadLine());
+                                    }
+                                }
+                                Console.WriteLine("Enter the elements of Matrix 2:");
+                                for (int i = 0; i < row; i++) {
+                                    for (int j = 0; j < coloum; j++) {
+                                        mat2[i, j] = Convert.ToInt32(Console.ReadLine());
+                                    }
+                                }
+                                c1.MatrixAdd(mat1, mat2);
+                            }
+                            else if (input == 2) {
+                                Console.Write("Enter the number of rows for mat1: ");
+                                row = Convert.ToInt32(Console.ReadLine());
+                                Console.Write("Enter the number of coloums for mat1: ");
+                                coloum = Convert.ToInt32(Console.ReadLine());
+                                int[,] mat1 = new int[row, coloum];
+
+                                Console.Write("Enter the number of rows for mat2: ");
+                                row = Convert.ToInt32(Console.ReadLine());
+                                Console.Write("Enter the number of coloums for mat2: ");
+                                coloum = Convert.ToInt32(Console.ReadLine());
+                                int[,] mat2 = new int[row, coloum];
+                                Console.WriteLine("Enter the elements of Matrix 1:");
+                                for (int i = 0; i < row; i++) {
+                                    for (int j = 0; j < coloum; j++) {
+                                        mat1[i, j] = Convert.ToInt32(Console.ReadLine());
+                                    }
+                                }
+                                Console.WriteLine("Enter the elements of Matrix 2:");
+                                for (int i = 0; i < row; i++) {
+                                    for (int j = 0; j < coloum; j++) {
+                                        mat2[i, j] = Convert.ToInt32(Console.ReadLine());
+                                    }
+                                }
+                                c1.MatrixSub(mat1, mat2);
+                            }
+                            else if (input == 3) {
+                                Console.Write("Enter the number of rows for mat1: ");
+                                row = Convert.ToInt32(Console.ReadLine());
+                                Console.Write("Enter the number of coloums for mat1: ");
+                                coloum = Convert.ToInt32(Console.ReadLine());
+                                int[,] mat1 = new int[row, coloum];
+
+                                Console.Write("Enter the number of rows for mat2: ");
+                                row = Convert.ToInt32(Console.ReadLine());
+                                Console.Write("Enter the number of coloums for mat2: ");
+                                coloum = Convert.ToInt32(Console.ReadLine());
+                                int[,] mat2 = new int[row, coloum];
+                                Console.WriteLine("Enter the elements of Matrix 1:");
+                                for (int i = 0; i < row; i++) {
+                                    for (int j = 0; j < coloum; j++) {
+                                        mat1[i, j] = Convert.ToInt32(Console.ReadLine());
+                                    }
+                                }
+                                Console.WriteLine("Enter the elements of Matrix 2:");
+                                for (int i = 0; i < row; i++) {
+                                    for (int j = 0; j < coloum; j++) {
+                                        mat2[i, j] = Convert.ToInt32(Console.ReadLine());
+                                    }
+                                }
+                                c1.MatrixMultiplication(mat1, mat2);
+                            }
+                            else if (input == 4) {
+                                Console.Write("Enter the number of rows for matrix: ");
+                                row = Convert.ToInt32(Console.ReadLine());
+                                Console.Write("Enter the number of coloums for matrix: ");
+                                coloum = Convert.ToInt32(Console.ReadLine());
+                                int[,] mat1 = new int[row, coloum];
+                                Console.WriteLine("Enter the elements of Matrix:");
+                                for (int i = 0; i < row; i++) {
+                                    for (int j = 0; j < coloum; j++) {
+                                        mat1[i, j] = Convert.ToInt32(Console.ReadLine());
+                                    }
+                                }
+                                c1.MatrixTranspose(mat1);
+                            }
+                            else if (input == 5) {
+                                break;
+                            }
+                        }
+                        else if (input == 4) {
+                            MenuForPolynomial();
+                            Console.Write("Enter your option: ");
+                            input = Convert.ToInt32(Console.ReadLine());
+                            if (input == 1) {
+                                Console.Write("Enter the Coefficient of X^2: ");
+                                a = Convert.ToInt32(Console.ReadLine());
+                                Console.Write("Enter the Coefficient of X: ");
+                                b = Convert.ToInt32(Console.ReadLine());
+                                Console.Write("Enter the term independant of X: ");
+                                c = Convert.ToInt32(Console.ReadLine());
+
+                                c1.Polynomial(a, b, c);
+                            }
+                            else if (input == 2) {
+                                break;
+                            }   
+                        }
+                        else if (input == 5) {
+                            Console.WriteLine("1. Proceed");
+                            Console.WriteLine("2. Go Back");
+                            Console.Write("Enter your option");
+                            input = Convert.ToInt32(Console.ReadLine());
+                            if (input == 1) {
+                                Console.Write("Start: ");
+                                start = Convert.ToInt32(Console.ReadLine());
+                                Console.Write("End: ");
+                                end = Convert.ToInt32(Console.ReadLine());
+                                Console.Write("Step: ");
+                                step = Convert.ToInt32(Console.ReadLine());
+                                Console.Write("Enter the Coefficient of X: ");
+                                coeffOfx = Convert.ToInt32(Console.ReadLine());
+                                Console.Write("Enter the Coefficient of Y: ");
+                                coeffOfy = Convert.ToInt32(Console.ReadLine());
+
+                                c1.table(start, end, step, coeffOfx, coeffOfy);
+                            }
+                            else if (input==2){
+                                break;
+                            }
+                        }
+                        else if (input == 6) {
+                            break;
+                        }
+                    }
+                }
+                else if (input == 3) {
+                    Console.WriteLine("Program Ended");
+                    break;
+                }
+
+            }
+            Console.ReadKey();
+        }
+    }
+}
+
